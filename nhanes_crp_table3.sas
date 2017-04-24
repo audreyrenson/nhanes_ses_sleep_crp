@@ -1,5 +1,5 @@
-*libname dat 'H:\Personal\NHANES SES sleep CRP';
-libname dat 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP';
+libname dat 'H:\Personal\NHANES SES sleep CRP';
+*libname dat 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP';
 options fmtsearch=(dat.formats);
 
 /* selecting a sample of 5% to play with */
@@ -19,6 +19,28 @@ proc surveyselect data=dat.final out=outboot
         outhits
         rep=&reps;
 run;
+/**************************/
+/* 0. CRUDE TOTAL EFFECTS */
+/**************************/
+/* income */
+ods output parameterestimates=te_crude_pir;
+proc surveyreg data=dat.final;
+	strata strata; cluster cluster; weight weight;
+		class pir_cat;
+		model crp_log = pir_cat /solution CLPARM;
+run; 
+/* education */
+ods output parameterestimates=te_crude_edu;
+proc surveyreg data=dat.final;
+	strata strata; cluster cluster; weight weight;
+		class DMDEDUC2;
+		model crp_log = DMDEDUC2 /solution CLPARM;
+run; 
+data te_crude (keep=param est_TE_crude lwr_TE_crude upr_TE_crude); set te_crude_edu te_crude_pir;
+	param=parameter; est_TE_crude=estimate; lwr_TE_crude=LowerCL; upr_TE_crude=UpperCL;
+run;
+
+
 /**************************************************************/
 /* 1. EXPOSURE=INCOME, MEDIATOR=POOR SLEEP (with interaction) */
 /**************************************************************/
