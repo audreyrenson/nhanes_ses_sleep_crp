@@ -53,7 +53,6 @@ proc surveyreg data=dat.final;
         model crp_log = pir_cat RIAGENDR RIDRETH1 RIDAGEYR  birth_control
                 cotinine_cat hrt obese sleep_med /solution CLPARM;
 run;
-proc print data=p; run;
 data total_effect_pir (keep=parameter estimate probt lowercl uppercl);
         set p (firstobs=2 obs=4);
 run;
@@ -194,7 +193,6 @@ proc surveyreg data=dat.final order=INTERNAL;
         model crp_log = DMDEDUC2  RIAGENDR RIDRETH1 RIDAGEYR  birth_control
                 cotinine_cat hrt obese sleep_med /solution CLPARM;
 run;
-proc print data=p; run;
 data total_effect (keep=parameter estimate probt lowercl uppercl est_exp lwr_exp upr_exp);
         set total_effect_pir p (firstobs=2 obs=6);
         est_exp = exp(estimate);
@@ -298,7 +296,7 @@ run;
 data pir199_ps (keep=param est_ps lwr_ps upr_ps ); set dat.result_income_poorsleep;
         param="pir_cat 100-199%"; est_ps =estimate199; lwr_ps =p_199_2_5; upr_ps =p_199_97_5;
 run;
-data ps; set pir100_ps pir199_ps; run;
+data ps; set pir199_ps pir100_ps ; run;
 proc sort data=ps; by param; run;
 proc sort data=table3; by param; run;
 data te (keep=param est_TE lwr_TE upr_TE); set total_effect;
@@ -306,10 +304,18 @@ data te (keep=param est_TE lwr_TE upr_TE); set total_effect;
 run;
 proc sort data=te; by param; run;
 data table3; merge te table3 ps; by param; run;
+proc sort data=te_crude; by param; run;
+data table3; merge table3 te_crude; by param; if not(param="Intercept"); run;
 
-proc export
+*proc export
   data=table3
   dbms=xlsx
   outfile="C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP\table3.xlsx"
+  replace;
+*run;
+proc export
+  data=table3
+  dbms=xlsx
+  outfile="H:\Personal\NHANES SES sleep CRP\table3.xlsx"
   replace;
 run;
