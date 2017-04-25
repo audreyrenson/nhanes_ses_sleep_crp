@@ -122,24 +122,34 @@ data p; set p; effect='sleep_med'; run; data e; set e; where not(effect='Model')
 data sleep_med (keep=effect parameter estimate probF); merge e p; by effect; run;
 
 /* combine into table 2 */
-data table2 (keep=effect parameter estimate pval);
+data table2 (keep=effect parameter estimate exp_estimate pval);
         set edu pir phys gender race age birth cotinine hrt obese poor short sleep_med;
-        if probF < 0.0001 then pval = "<0.0001";
-        else pval = input(probF, 1.4);
-        parameter = STRIP( TRANWRD(parameter, effect, "") );
 
+		if probF < 0.0001 then pval = "<0.0001";
+        else pval = input(probF, 1.4);
+
+		parameter = STRIP( TRANWRD(parameter, effect, "") );
+
+		exp_estimate = exp(estimate);
 run;
-proc datasets lib=work;
-        save table2;
+*get total geometric mean crp;
+ods output statistics=mean_crp_log; 
+proc surveymeans data=dat.final;
+	strata strata; cluster cluster; weight weight;
+	var crp_log;
 run;
+data geom_mean_crp (keep=geom_mean); set mean_crp_log; 
+	geom_mean = exp(mean);
+run;
+proc print data=geom_mean_crp; title 'Geometric mean CRP (total)'; run;
+
 proc export
   data=table2
   dbms=xlsx
-  outfile="C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP\table2.xlsx"
+  outfile="h:\personal\NHANES SES sleep CRP\table2.xlsx"
   replace;
 run;
 
-proc contents data=table2;run;
 /* Checking residuals
 ods graphics on;
 proc glm data=dat.final order=INTERNAL;
