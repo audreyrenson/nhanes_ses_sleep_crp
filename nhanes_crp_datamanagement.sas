@@ -1,5 +1,5 @@
-*libname dat 'H:\Personal\NHANES SES-sleep-CRP';
-libname dat 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP';
+libname dat 'H:\Personal\NHANES SES-sleep-CRP';
+*libname dat 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP';
 *Create libraries for each xpt file;
 libname bmx_d Xport 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP\data\bmx_d.xpt';
 libname bmx_e Xport 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP\data\bmx_e.xpt';
