@@ -1,5 +1,5 @@
-libname dat 'H:\Personal\NHANES SES sleep CRP';
-*libname dat 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP';
+*libname dat 'H:\Personal\NHANES SES sleep CRP';
+libname dat 'C:\Users\Audrey\documents\NHANES_SES_sleep_CRP';
 options fmtsearch=(dat.formats);
 
 /*Mean CRP (log) by each variable & f test */
@@ -125,21 +125,21 @@ data sleep_med (keep=effect parameter estimate probF); merge e p; by effect; run
 data table2 (keep=effect parameter estimate exp_estimate pval);
         set edu pir phys gender race age birth cotinine hrt obese poor short sleep_med;
 
-		if probF < 0.0001 then pval = "<0.0001";
+                if probF < 0.0001 then pval = "<0.0001";
         else pval = input(probF, 1.4);
 
-		parameter = STRIP( TRANWRD(parameter, effect, "") );
+                parameter = STRIP( TRANWRD(parameter, effect, "") );
 
-		exp_estimate = exp(estimate);
+                exp_estimate = exp(estimate);
 run;
 *get total geometric mean crp;
-ods output statistics=mean_crp_log; 
+ods output statistics=mean_crp_log;
 proc surveymeans data=dat.final;
-	strata strata; cluster cluster; weight weight;
-	var crp_log;
+        strata strata; cluster cluster; weight weight;
+        var crp_log;
 run;
-data geom_mean_crp (keep=geom_mean); set mean_crp_log; 
-	geom_mean = exp(mean);
+data geom_mean_crp (keep=geom_mean); set mean_crp_log;
+        geom_mean = exp(mean);
 run;
 proc print data=geom_mean_crp; title 'Geometric mean CRP (total)'; run;
 
@@ -152,23 +152,13 @@ run;
 
 /* Checking residuals
 ods graphics on;
-proc glm data=dat.final order=INTERNAL;
-        class DMDEDUC2(ref='College Graduate or above') PAD200(ref='Yes') poor_sleep(ref='Yes')
-                RIAGENDR(ref='Male') RIDRETH1(ref='Non-Hispanic White') agecat(ref='20-24')
-                birth_control(ref='No') cotinine_cat(ref='<3 ng/mL') hrt(ref='No')
-                obese(ref='No') sleep_med(ref='No');
-        model crp_log = DMDEDUC2 poor_sleep PAD200 RIAGENDR RIDRETH1 agecat birth_control
+proc glm data=dat.final order=INTERNAL PLOTS=DIAGNOSTICS;
+        class DMDEDUC2 phys_act poor_sleep
+                RIAGENDR RIDRETH1 agecat
+                birth_control cotinine_cat hrt
+                obese sleep_med;
+        model crp_log = DMDEDUC2 poor_sleep phys_act RIAGENDR RIDRETH1 agecat birth_control
                 cotinine_cat hrt obese sleep_med;
-        OUTPUT OUT = C
-                predicted = fit residual = resid
-                rstudent = studentized_resid;
-run;
-proc univariate data=c;
-        var resid;
-        histogram;
-run;
-proc plot data=c;
-plot resid*fit studentized_resid*fit;
-run;
 
+run; quit;
 */
