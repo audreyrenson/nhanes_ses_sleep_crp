@@ -204,7 +204,6 @@ run;
 proc sort data=oneway; by table value; run;
 proc sort data=ss; by table value; run;
 proc sort data=ps; by table value; run;
-
 data table1;
         merge oneway ss ps;
         by table value;
