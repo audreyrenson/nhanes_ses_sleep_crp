@@ -1,27 +1,27 @@
-libname dat 'H:\Personal\NHANES SES-sleep-CRP';
+libname dat 'H:\Personal\NHANES SES sleep CRP';
 *libname dat 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP';
 *Create libraries for each xpt file;
-libname bmx_d Xport 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP\data\bmx_d.xpt';
-libname bmx_e Xport 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP\data\bmx_e.xpt';
-libname bmx_f Xport 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP\data\bmx_f.xpt';
-libname crp_d Xport 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP\data\crp_d.xpt';
-libname crp_e Xport 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP\data\crp_e.xpt';
-libname crp_f Xport 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP\data\crp_f.xpt';
-libname demo_d Xport 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP\data\demo_d.xpt';
-libname demo_e Xport 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP\data\demo_e.xpt';
-libname demo_f Xport 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP\data\demo_f.xpt';
-libname slq_d Xport 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP\data\slq_d.xpt';
-libname slq_e Xport 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP\data\slq_e.xpt';
-libname slq_f Xport 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP\data\slq_f.xpt';
-libname RHQ_D Xport 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP\data\rhq_d.xpt';
-libname RHQ_e Xport 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP\data\rhq_e.xpt';
-libname RHQ_f Xport 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP\data\rhq_f.xpt';
-libname cot_d Xport 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP\data\cot_d.xpt';
-libname cotnal_e Xport 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP\data\cotnal_e.xpt';
-libname cotnal_f Xport 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP\data\cotnal_f.xpt';
-libname paq_d Xport 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP\data\paq_d.xpt';
-libname paq_e Xport 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP\data\paq_e.xpt';
-libname paq_f Xport 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP\data\paq_f.xpt';
+libname bmx_d Xport 'H:\personal\NHANES SES sleep CRP\data\bmx_d.xpt';
+libname bmx_e Xport 'H:\personal\NHANES SES sleep CRP\data\bmx_e.xpt';
+libname bmx_f Xport 'h:\personal\NHANES SES sleep CRP\data\bmx_f.xpt';
+libname crp_d Xport 'h:\personal\NHANES SES sleep CRP\data\crp_d.xpt';
+libname crp_e Xport 'h:\personal\NHANES SES sleep CRP\data\crp_e.xpt';
+libname crp_f Xport 'h:\personal\NHANES SES sleep CRP\data\crp_f.xpt';
+libname demo_d Xport 'h:\personal\NHANES SES sleep CRP\data\demo_d.xpt';
+libname demo_e Xport 'h:\personal\NHANES SES sleep CRP\data\demo_e.xpt';
+libname demo_f Xport 'h:\personal\NHANES SES sleep CRP\data\demo_f.xpt';
+libname slq_d Xport 'h:\personal\NHANES SES sleep CRP\data\slq_d.xpt';
+libname slq_e Xport 'h:\personal\NHANES SES sleep CRP\data\slq_e.xpt';
+libname slq_f Xport 'h:\personal\NHANES SES sleep CRP\data\slq_f.xpt';
+libname RHQ_D Xport 'h:\personal\NHANES SES sleep CRP\data\rhq_d.xpt';
+libname RHQ_e Xport 'h:\personal\NHANES SES sleep CRP\data\rhq_e.xpt';
+libname RHQ_f Xport 'h:\personal\NHANES SES sleep CRP\data\rhq_f.xpt';
+libname cot_d Xport 'h:\personal\NHANES SES sleep CRP\data\cot_d.xpt';
+libname cotnal_e Xport 'h:\personal\NHANES SES sleep CRP\data\cotnal_e.xpt';
+libname cotnal_f Xport 'h:\personal\NHANES SES sleep CRP\data\cotnal_f.xpt';
+libname paq_d Xport 'h:\personal\NHANES SES sleep CRP\data\paq_d.xpt';
+libname paq_e Xport 'h:\personal\NHANES SES sleep CRP\data\paq_e.xpt';
+libname paq_f Xport 'h:\personal\NHANES SES sleep CRP\data\paq_f.xpt';
 *vertically merge years for each dataset;
 data bmx; set bmx_d.bmx_d bmx_e.bmx_e bmx_f.bmx_f; run;
 data crp; set crp_d.crp_d crp_e.crp_e crp_f.crp_f; run;
@@ -41,8 +41,7 @@ data dat.nhanes; *horizontally merge datasets and create 6-year weights, save ph
         label WTINT6YR = "Full Sample 6 Year Interview Weight";
 
 run;
-proc contents data=dat.nhanes;
-run;
+
 
 
 proc format library=dat; * all formats;
@@ -216,12 +215,14 @@ run;
 
 data nhanes; *dropping 22 observations due to crp >10;
         set nhanes;
-        if crp_bin = 2 then delete;
+
+		include = 1;
+        if crp_bin = 2 then include=0;
 run;
 proc freq data=nhanes; tables RHD143*RIDEXPRG; run; *check for pregnancies;
 data nhanes; *dropping 456 observations due to currently pregnant (at exam);
         set nhanes;
-        if RIDEXPRG = 1 then delete;
+        if RIDEXPRG = 1 then include=0;
 run;
 data nhanes; *renaming survey design variables;
         set nhanes;
@@ -235,7 +236,7 @@ data dat.nhanes;
 run;
 
 *save final dataset with only relevant variables;
-data dat.final (keep=SEQN weight strata cluster LBXCRP crp_bin crp_log sleep_dur short_sleep poor_sleep pir_cat DMDEDUC2 agecat RIDAGEYR
+data dat.final (keep=SEQN weight strata cluster include LBXCRP crp_bin crp_log sleep_dur short_sleep poor_sleep pir_cat DMDEDUC2 agecat RIDAGEYR
                                         cotinine_cat LBXCOT hrt obese sleep_med birth_control phys_act RIAGENDR RIDRETH1 PAD200);
         set nhanes;
 run;

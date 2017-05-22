@@ -2,6 +2,10 @@
 libname dat 'C:\Users\Audrey\documents\NHANES_SES_sleep_CRP';
 options fmtsearch=(dat.formats);
 
+/**************************************/
+/*  PAPER TABLE 2   *******************/
+/**************************************/
+
 /*Mean CRP (log) by each variable & f test */
 ods output parameterestimates=p effects=e;
 proc surveyreg data=dat.final; title "univariable crp=edu";

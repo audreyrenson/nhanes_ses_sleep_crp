@@ -10,8 +10,12 @@ options fmtsearch=(dat.formats);
         outhits;
 *run;
 
-/* creating a bootstrap sample of 300 replicates */
-%let reps=300;
+/*****************************/
+/* PAPER TABLE 3 *************/
+/*****************************/
+
+/* creating a bootstrap sample of 1000 replicates */
+%let reps=1000;
 proc surveyselect data=dat.final out=outboot
         seed=1
         method=urs
