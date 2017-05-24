@@ -162,12 +162,12 @@ run;
 data nhanes; *coding other covariates;
         set nhanes;
 
-        hrt = 4;
-        if RIAGENDR = 1 then hrt = 3;
+        hrt = 0;
+        if RIAGENDR = 1 then hrt = 0;
         else if RHQ540 = 2 then hrt = 0;
         else if RHQ558 = 1 or RHQ566 = 1 or RHQ574 = 1 or RHQ584 = 1 or RHQ600 = 1 then hrt = 1;
         else if RHQ558 = 2 or RHQ566 = 2 or RHQ574 = 2 or RHQ584 = 2 or RHQ600 = 2 then hrt = 0;
-        format hrt hrt.;
+		format hrt hrt.;
         label hrt = "Using any HRT now (y/n)";
 
         obese = 2;
@@ -182,8 +182,8 @@ data nhanes; *coding other covariates;
         format sleep_med yesno.;
         label sleep_med = "Used sleep medications 5 or more times in the last 30 days";
 
-        birth_control = 4;
-        if RIAGENDR = 1 then birth_control = 3;
+        birth_control = 0;
+        if RIAGENDR = 1 then birth_control = 0;
         else if RHD442 = 1 or RHQ520 = 1 then birth_control = 1;
         else if RHQ420 = 2 or RHQ510 = 2 then birth_control = 0;
         else if RHD442 = 2 or RHQ520 = 2 then birth_control = 0;
