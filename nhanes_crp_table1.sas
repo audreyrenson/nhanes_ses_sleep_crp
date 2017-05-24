@@ -1,4 +1,4 @@
-libname dat 'H:\Personal\NHANES SES sleep CRP';
+libname dat 'c:\users\audrey\documents\nhanes_ses_sleep_crp';
 *libname dat 'C:\Users\Audrey\Google Drive\CUNY SPH Coursework\EPID622 Applied Research- Data Management\NHANES SES sleep CRP';
 options fmtsearch=(dat.formats);
 
@@ -104,7 +104,7 @@ proc surveyfreq data=dat.final; strata strata; cluster cluster; weight weight; t
 
 *chi-sq p-values;
 data ps_dmdeduc2_ch (keep=table cvalue1); set ps_dmdeduc2_ch;
-		where substr(table, 1, 7) = "Table 2" AND label1="Pr > ChiSq"; table="DMDEDUC2"; run;
+                where substr(table, 1, 7) = "Table 2" AND label1="Pr > ChiSq"; table="DMDEDUC2"; run;
 data ps_pir_cat_ch (keep=table cvalue1); set ps_pir_cat_ch;
         where substr(table, 1, 7) = "Table 2" AND label1="Pr > ChiSq"; table="pir_cat"; run;
 data ps_short_sleep_ch (keep=table cvalue1); set ps_short_sleep_ch;
@@ -165,15 +165,15 @@ data ps_hrt; merge ps_hrt ps_hrt_ch; by table; run;
 data ps_obese; merge ps_obese ps_obese_ch; by table; run;
 data ps_sleep_med; merge ps_sleep_med ps_sleep_med_ch; by table; run;
 data ps_phys_act; merge ps_phys_act ps_phys_act_ch; by table; run;
-	
+
 data ps (keep=table value ps_freq ps_perc ps_p);
         set ps_dmdeduc2   ps_pir_cat  ps_short_sleep  ps_riagendr ps_hrt
         ps_ridreth1  ps_birth_control ps_cotinine_cat ps_obese ps_sleep_med ps_phys_act;
-		where frequency < 7310;
+                where frequency < 7310;
 
         ps_freq = frequency;
         ps_perc = percent * 0.01;
-		ps_p = cvalue1;
+                ps_p = cvalue1;
 run;
 
 /* Two-way frequencies by short sleep */
@@ -206,7 +206,7 @@ proc surveyfreq data=dat.final; strata strata; cluster cluster; weight weight; t
 
 *chi sq p-values;
 data ss_dmdeduc2_ch (keep=table cvalue1); set ss_dmdeduc2_ch;
-		where substr(table, 1, 7) = "Table 2" AND label1="Pr > ChiSq"; table="DMDEDUC2"; run;
+                where substr(table, 1, 7) = "Table 2" AND label1="Pr > ChiSq"; table="DMDEDUC2"; run;
 data ss_pir_cat_ch (keep=table cvalue1); set ss_pir_cat_ch;
         where substr(table, 1, 7) = "Table 2" AND label1="Pr > ChiSq"; table="pir_cat"; run;
 data ss_poor_sleep_ch (keep=table cvalue1); set ss_poor_sleep_ch;
@@ -273,7 +273,7 @@ data ss (keep = table value ss_freq ss_perc ss_p);
 
         ss_freq = frequency;
         ss_perc = percent * 0.01;
-		ss_p = cvalue1;
+                ss_p = cvalue1;
 run;
 
 
@@ -293,6 +293,6 @@ run;
 proc export
   data=table1
   dbms=xlsx
-  outfile="h:\personal\NHANES SES sleep CRP\table1.xlsx"
+  outfile="c:\users\audrey\documents\nhanes_ses_sleep_crp\table1.xlsx"
   replace;
 run;
