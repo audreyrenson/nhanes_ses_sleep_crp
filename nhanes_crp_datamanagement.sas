@@ -45,7 +45,7 @@ run;
 
 
 proc format library=dat; * all formats;
-        value yesno 3="No" 1="Yes" 2="Missing";
+        value yesno 2="No" 1="Yes";
         value crpbin 0="<3" 1="3 to 10" 2=">10";
         value sleepdur 0="7" 1="6" 2="<6" 3="8" 4=">8";
         value pir 3="200%+" 1="100-199%" 2="0-100%";
@@ -83,7 +83,7 @@ data nhanes; * grab from physical file, coding exposures, outcomes, mediators;
         format sleep_dur sleepdur.;
         label sleep_dur="How much sleep do you get (hours)?";
 
-        short_sleep = 3;
+        short_sleep = 2;
         if sleep_dur = 2 then short_sleep = 1;
         else if sleep_dur = . then short_sleep = .;
         format short_sleep yesno.;
@@ -96,7 +96,7 @@ data nhanes; * grab from physical file, coding exposures, outcomes, mediators;
         else if 2 le SLQ100 le 4  then poor_sleep = 1;
         else if 2 le SLQ110 le 4  then poor_sleep = 1;
         else if 2 le SLQ120 le 4  then poor_sleep = 1;
-        else if SLQ080 < 2 and SLQ090 < 2 and SLQ100 < 2 and SLQ110 < 2 and SLQ120 < 2 then poor_sleep = 3;
+        else if SLQ080 < 2 and SLQ090 < 2 and SLQ100 < 2 and SLQ110 < 2 and SLQ120 < 2 then poor_sleep = 2;
         format poor_sleep yesno.;
 
         pir_cat = .;
@@ -167,18 +167,16 @@ data nhanes; *coding other covariates;
         else if RHQ540 = 2 then hrt = 0;
         else if RHQ558 = 1 or RHQ566 = 1 or RHQ574 = 1 or RHQ584 = 1 or RHQ600 = 1 then hrt = 1;
         else if RHQ558 = 2 or RHQ566 = 2 or RHQ574 = 2 or RHQ584 = 2 or RHQ600 = 2 then hrt = 0;
-		format hrt hrt.;
+                format hrt hrt.;
         label hrt = "Using any HRT now (y/n)";
 
         obese = 2;
         if BMXBMI ge 30 then obese=1;
-        else if BMXBMI lt 30 then obese=3;
         format obese yesno.;
         label obese = "BMI 30+ (y/n)";
 
         sleep_med = 2;
         if SLQ140=2 or SLQ140=3 then sleep_med = 1;
-        else if SLQ140 le 2 then sleep_med = 3;
         format sleep_med yesno.;
         label sleep_med = "Used sleep medications 5 or more times in the last 30 days";
 
@@ -189,7 +187,7 @@ data nhanes; *coding other covariates;
         else if RHD442 = 2 or RHQ520 = 2 then birth_control = 0;
         format birth_control hrt.;
 
-        phys_act = 3;
+        phys_act = 2;
         if PAQ605 = 1
                 OR PAQ620 = 1
                 OR PAQ635 = 1
@@ -216,7 +214,7 @@ run;
 data nhanes; *dropping 22 observations due to crp >10;
         set nhanes;
 
-		include = 1;
+                include = 1;
         if crp_bin = 2 then include=0;
 run;
 proc freq data=nhanes; tables RHD143*RIDEXPRG; run; *check for pregnancies;
