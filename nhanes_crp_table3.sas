@@ -67,7 +67,7 @@ data total_effect_pir (keep=parameter estimate probt lowercl uppercl include);
 run;
 
 
-/*outcome regression*/
+/*outcome (E+M) regression*/
 proc surveyreg data=outboot order=INTERNAL;* 1. outcome model;
         by replicate;
         strata strata; cluster cluster; weight weight;
@@ -80,6 +80,20 @@ proc surveyreg data=outboot order=INTERNAL;* 1. outcome model;
         ods output ParameterEstimates = outcome_model;
 		domain include;
 run;
+/* outcome (M) regression*/
+proc surveyreg data=dat.final order=INTERNAL;* 1. outcome model;
+        strata strata; cluster cluster; weight weight;
+        class poor_sleep sleep_med
+                RIAGENDR RIDRETH1
+                birth_control cotinine_cat hrt obese;
+        model crp_log =  poor_sleep RIAGENDR RIDRETH1 RIDAGEYR  birth_control
+                cotinine_cat hrt obese sleep_med /solution;
+        ods select none;
+        ods output ParameterEstimates = outcome_mediator_model;
+		domain include;
+run;
+
+
 data poorsleep2 (keep = replicate poorsleep); set outcome_model;
         where parameter = 'poor_sleep Yes' AND include=1;
         poorsleep = estimate;
@@ -92,16 +106,16 @@ data poorsleep_pir199 (keep = replicate poorsleep_pir199); set outcome_model;
         where parameter = 'poor_sleep*pir_cat Yes 100-199%' AND include=1;
         poorsleep_pir199 = estimate;
 run;
-/*mediator regression */
+/*mediator (E) regression */
 proc surveyreg data=outboot order=INTERNAL;
-        by replicate;
+		by replicate;
         strata strata; cluster cluster; weight weight;
         class poor_sleep sleep_med pir_cat
                 RIAGENDR RIDRETH1
                 birth_control cotinine_cat hrt obese;
-        model poor_sleep = pir_cat RIAGENDR RIDRETH1 RIDAGEYR  birth_control
+        model poor_sleep_reg = pir_cat RIAGENDR RIDRETH1 RIDAGEYR  birth_control
                 cotinine_cat hrt obese sleep_med /solution;
-        ods select none;
+		ods select all;
         ods output ParameterEstimates = mediator_model;
 		domain include;
 run;

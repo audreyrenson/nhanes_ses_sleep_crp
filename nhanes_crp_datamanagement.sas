@@ -99,6 +99,10 @@ data nhanes; * grab from physical file, coding exposures, outcomes, mediators;
         else if SLQ080 < 2 and SLQ090 < 2 and SLQ100 < 2 and SLQ110 < 2 and SLQ120 < 2 then poor_sleep = 2;
         format poor_sleep yesno.;
 
+		*coding as 0/1 for regression;
+		poor_sleep_reg = 2 + (-1 * poor_sleep);
+		short_sleep_reg = 2 + (-1 * short_sleep);
+
         pir_cat = .;
         if INDFMPIR > 2 then pir_cat = 3;
         else if INDFMPIR > 1 then pir_cat = 1;
@@ -234,8 +238,9 @@ data dat.nhanes;
 run;
 
 *save final dataset with only relevant variables;
-data dat.final (keep=SEQN weight strata cluster include LBXCRP crp_bin crp_log sleep_dur short_sleep poor_sleep pir_cat DMDEDUC2 agecat RIDAGEYR
-                                        cotinine_cat LBXCOT hrt obese sleep_med birth_control phys_act RIAGENDR RIDRETH1 PAD200);
+data dat.final (keep=SEQN weight strata cluster include LBXCRP crp_bin crp_log sleep_dur short_sleep poor_sleep 
+					short_sleep_reg poor_sleep_reg pir_cat DMDEDUC2 agecat RIDAGEYR cotinine_cat LBXCOT hrt obese 
+					sleep_med birth_control phys_act RIAGENDR RIDRETH1 PAD200);
         set nhanes;
 run;
 proc contents data=dat.final;
